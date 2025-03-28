@@ -1,16 +1,15 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+import LinearRegressionModel as lrm
+import NeuralNetwork as nnm
+import numpy as np
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+X = np.array([[0,0], [0,1], [1,0], [1,1]])
+y = np.array([[0], [1], [1], [0]])  # XOR problem
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+nn = nnm.NeuralNetwork(layers=[2,3,1])  # Flexible architecture
+nn.fit(X, y)
+predictions = nn.predict(X)
+
+print("OOP Predictions:", predictions)
+
+
