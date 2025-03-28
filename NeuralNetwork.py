@@ -5,10 +5,10 @@ class NeuralNetwork:
         self.layers = layers
         self.lr = lr
         self.epochs = epochs
-        # Initialize weights and biases randomly
-
+        # Initialize Xavier/He weights
         self.weights = [np.random.randn(self.layers[i], self.layers[i + 1]) * np.sqrt(2.0 / self.layers[i])
                         for i in range(len(self.layers) - 1)]
+        # Initialize all biases to zero
         self.biases = [np.zeros((1, self.layers[i + 1])) for i in range(len(self.layers) - 1)]
 
     def sigmoid(self, x):
@@ -33,7 +33,7 @@ class NeuralNetwork:
             # Update weights and biases
             for i in range(len(self.weights)):
                 self.weights[i] += activations[i].T.dot(deltas[i]) * self.lr
-                self.biases[i] += np.sum(deltas[i], axis=0, keepdims= True) * self.lr
+                self.biases[i] += np.sum(deltas[i], axis=0, keepdims=True) * self.lr
 
     def predict(self, X):
         output = X.copy()  # Avoid modifying input
